@@ -586,6 +586,12 @@
     };
 
     // 3. Render Functions
+    const getValidUrl = (schoolName, linkText) => {
+      if (linkText.startsWith('http')) return linkText;
+      // 如果不是直接的網址，就轉換成 Google 搜尋連結幫學生快速尋找
+      return `https://www.google.com/search?q=${encodeURIComponent(schoolName + ' ' + linkText)}`;
+    };
+
     function renderApp() {
       updateNav();
       updateTabs();
@@ -762,17 +768,10 @@
             <h4 class="font-bold text-slate-800 text-sm mb-2">${i.name}</h4>
             <p class="text-xs text-slate-500 whitespace-pre-line mb-4">${i.content}</p>
           </div>
-<div class="border-t pt-3 flex items-center justify-between text-xs font-semibold text-teal-700">
-  <span>承辦 / 連結：</span>
-
-  <a
-    href="${i.link}"
-    target="_blank"
-    class="text-blue-600 text-[10px] underline hover:text-blue-800 max-w-[150px] truncate"
-  >
-    點我查看
-  </a>
-</div>
+          <div class="border-t pt-3 flex items-center justify-between text-xs font-semibold text-teal-700">
+            <span>承辦 / 連結：</span>
+            <a href="${getValidUrl(schData.name, i.link)}" target="_blank" rel="noopener noreferrer" class="text-teal-600 text-[10px] underline cursor-pointer hover:text-teal-800 max-w-[150px] truncate pointer-events-auto inline-block">${i.link}</a>
+          </div>
         </div>`).join('');
     }
 
@@ -804,7 +803,7 @@
                   <h4 class="font-bold text-xs mb-1.5">${i.name}</h4>
                   <p class="text-xs text-slate-500 mb-4">${i.content}</p>
                 </div>
-                <div class="text-[10px] text-slate-400 truncate">連結：<span class="underline">${i.link}</span></div>
+                <div class="text-[10px] text-slate-400 truncate mt-2">連結：<a href="${getValidUrl(s.name, i.link)}" target="_blank" rel="noopener noreferrer" class="text-teal-600 underline cursor-pointer hover:text-teal-800 pointer-events-auto inline-block" title="${i.link}">${i.link}</a></div>
               </div>`).join('')}
           </div>
         </div>`).join('');
