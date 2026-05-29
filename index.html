@@ -762,10 +762,17 @@
             <h4 class="font-bold text-slate-800 text-sm mb-2">${i.name}</h4>
             <p class="text-xs text-slate-500 whitespace-pre-line mb-4">${i.content}</p>
           </div>
-          <div class="border-t pt-3 flex items-center justify-between text-xs font-semibold text-teal-700">
-            <span>承辦 / 連結：</span>
-            <span class="text-slate-400 text-[10px] underline cursor-pointer max-w-[150px] truncate">${i.link}</span>
-          </div>
+         <div class="border-t pt-3 flex items-center justify-between text-xs font-semibold text-teal-700">
+  <span>承辦 / 連結：</span>
+
+  <a
+    href="${i.link}"
+    target="_blank"
+    class="text-blue-600 text-[10px] underline hover:text-blue-800 max-w-[150px] truncate"
+  >
+    點我查看
+  </a>
+</div>
         </div>`).join('');
     }
 
